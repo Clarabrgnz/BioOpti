@@ -12,37 +12,6 @@ BioOpti
 **BioOpti** helps you optimize your biochemical workflows — from culture media formulation to enzyme kinetics.  
 Whether you're a researcher, student, or just curious about bioprocesses, BioOpti makes it easier to simulate, predict, and improve your experimental setups.
 
-
-## 🔥 Quick Start
-
-### ⚠️⚠️⚠️COMPLTE FOR CULUTRE MDEIA OPTIMIZATION 
-
-
-### 🧪 Simulation of enzymatic reactions
-This quick example shows how to simulate an enzyme-catalyzed reaction under specific conditions.
-
-```python
-from bioopti.simulation import simulate_reaction
-
-# Simulate an enzyme reaction with your input parameters
-result = simulate_reaction(
-    substrate_conc=2.5,
-    enzyme_params={
-        "Vmax": 1.8,
-        "Km": 0.5,
-        "opt_pH": 7.0,
-        "opt_temp": 37,
-        "inh_type": "competitive",
-        "inh_conc": 0.1
-    },
-    pH=6.8,
-    temperature=35,
-    inhibitors=True
-)
-
-print(result)
-```
-
 ## 👩‍💻 Installation
 
 Create a new environment, you may also give the environment a different name. 
@@ -92,6 +61,36 @@ To install the package, run
 ```
 (conda_env) $ pip install tox
 (conda_env) $ tox
+```
+
+## 🔥 Quick Start
+
+### ⚠️⚠️⚠️COMPLTE FOR CULUTRE MDEIA OPTIMIZATION 
+
+
+### 🧪 Simulation of enzymatic reactions
+This quick example shows how to simulate an enzyme-catalyzed reaction under specific conditions.
+
+```python
+from bioopti.simulation import simulate_reaction
+
+# Simulate an enzyme reaction with your input parameters
+result = simulate_reaction(
+    substrate_conc=2.5,
+    enzyme_params={
+        "Vmax": 1.8,
+        "Km": 0.5,
+        "opt_pH": 7.0,
+        "opt_temp": 37,
+        "inh_type": "competitive",
+        "inh_conc": 0.1
+    },
+    pH=6.8,
+    temperature=35,
+    inhibitors=True
+)
+
+print(result)
 ```
 
 ## ⚖️ License
