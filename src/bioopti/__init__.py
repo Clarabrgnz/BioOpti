@@ -1,6 +1,11 @@
-"""toolkit for optimizing biochemical processes, including enzyme reaction rates and culture media."""
+"""
+BioOpti: A toolkit for optimizing biochemical processes,
+including enzyme reaction rates and culture media.
+"""
 
 from __future__ import annotations
-from .sabio import get_kinetic_params_from_sabio
 
-__version__ = "0.0.1"
+from .enzyme_kinetics import get_enzyme_kinetics
+from .simulation import simulate_from_local_data, simulate_reaction_rate
+
+__version__ = "0.1.0"

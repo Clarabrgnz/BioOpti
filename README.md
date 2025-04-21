@@ -9,20 +9,39 @@ BioOpti
 <br>
 
 
-toolkit for optimizing biochemical processes, including enzyme reaction rates and culture media
+**BioOpti** helps you optimize your biochemical workflows — from culture media formulation to enzyme kinetics.  
+Whether you're a researcher, student, or just curious about bioprocesses, BioOpti makes it easier to simulate, predict, and improve your experimental setups.
 
-## 🔥 Usage
+
+## 🔥 Quick Start
+
+### ⚠️⚠️⚠️COMPLTE FOR CULUTRE MDEIA OPTIMIZATION 
+
+
+### 🧪 Simulation of enzymatic reactions
+This quick example shows how to simulate an enzyme-catalyzed reaction under specific conditions.
 
 ```python
-from mypackage import main_func
+from bioopti.simulation import simulate_reaction
 
-# One line to rule them all
-result = main_func(data)
+# Simulate an enzyme reaction with your input parameters
+result = simulate_reaction(
+    substrate_conc=2.5,
+    enzyme_params={
+        "Vmax": 1.8,
+        "Km": 0.5,
+        "opt_pH": 7.0,
+        "opt_temp": 37,
+        "inh_type": "competitive",
+        "inh_conc": 0.1
+    },
+    pH=6.8,
+    temperature=35,
+    inhibitors=True
+)
+
+print(result)
 ```
-
-This usage example shows how to quickly leverage the package's main functionality with just one line of code (or a few lines of code). 
-After importing the `main_func` (to be renamed by you), you simply pass in your `data` and get the `result` (this is just an example, your package might have other inputs and outputs). 
-Short and sweet, but the real power lies in the detailed documentation.
 
 ## 👩‍💻 Installation
 
@@ -68,12 +87,19 @@ To install the package, run
 (bioopti) $ pip install -e ".[test,doc]"
 ```
 
-### Run tests and coverage
+### ⚙️ Run tests and coverage
 
 ```
 (conda_env) $ pip install tox
 (conda_env) $ tox
 ```
+
+## ⚖️ License
+
+This project is licensed under the **MIT License**.  
+You are free to use, modify, and distribute this software with proper attribution.  
+See the LICENSE file for full details.
+
 
 
 
