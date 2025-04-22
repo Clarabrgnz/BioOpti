@@ -17,18 +17,18 @@ Whether you're a researcher, student, or just curious about bioprocesses, BioOpt
 Create a new environment, you may also give the environment a different name. 
 
 ```
-conda create -n bioopti python=3.10 
+conda create -n bioopti-env python=3.10 
 ```
 
 ```
-conda activate bioopti
+conda activate bioopti-env
 (conda_env) $ pip install .
 ```
 
 If you need jupyter lab, install it 
 
 ```
-(bioopti) $ pip install jupyterlab
+(bioopti-env) $ pip install jupyterlab
 ```
 
 
@@ -53,7 +53,7 @@ Then add and commit changes as usual.
 To install the package, run
 
 ```
-(bioopti) $ pip install -e ".[test,doc]"
+(bioopti-env) $ pip install -e ".[test,doc]"
 ```
 
 ### ⚙️ Run tests and coverage
