@@ -72,25 +72,22 @@ To install the package, run
 This quick example shows how to simulate an enzyme-catalyzed reaction under specific conditions.
 
 ```python
-from bioopti.simulation import simulate_reaction
+from bioopti.simulation import simulate_reaction_rate
 
 # Simulate an enzyme reaction with your input parameters
-result = simulate_reaction(
+result = simulate_reaction_rate(
     substrate_conc=2.5,
-    enzyme_params={
-        "Vmax": 1.8,
-        "Km": 0.5,
-        "opt_pH": 7.0,
-        "opt_temp": 37,
-        "inh_type": "competitive",
-        "inh_conc": 0.1
-    },
-    pH=6.8,
-    temperature=35,
-    inhibitors=True
+    vmax=1.8,
+    km=0.5,
+    ph=6.8,
+    temp=35,
+    optimal_ph=7.0,
+    optimal_temp=37,
+    inhibitor_conc=0.1,
+    ki=0.3
 )
 
-print(result)
+print(f"Simulated reaction rate: {result:.4f} µmol/min")
 ```
 
 ## ⚖️ License
