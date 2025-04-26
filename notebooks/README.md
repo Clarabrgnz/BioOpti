@@ -1,3 +1,4 @@
-# Notebooks
+# 🧪 BioOpti - Project Report
 
-Folder to place your `.pynb` notebooks.
+This repository contains the Jupyter Notebook demonstrating the key functionalities of **BioOpti**. 
+It showcases simulations, optimizations, and practical applications of the toolkit's core modules.
