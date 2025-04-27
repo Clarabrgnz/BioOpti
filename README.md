@@ -14,7 +14,7 @@ Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it
 
 - [✨ Features](#-features)
 - [🚀 Installation](#-installation)
-- [🛠%ef%b8%8f Development Setup](#%ef%b8%8f-development-setup)
+- [🛠 Development Setup](#%ef%b8%8f-development-setup)
 - [✅ Running Tests](#-running-tests)
 - [⚡ Quick Start](#-quick-start)
 - [🤝 Contributors](#-contributors)
@@ -27,7 +27,7 @@ Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it
 - 📈 **Culture Media Optimization** *(Coming soon)*:  
   Calculate optimal nutrient ratios to maximize organism growth or product yield.
 
-- 🧪 **Enzymatic Reaction Simulation**:  
+- 🔬 **Enzymatic Reaction Simulation**:  
   Predict enzyme-catalyzed reaction rates under varying conditions (substrate concentration, pH, temperature, inhibitors).
   Easily simulate reactions based on Vmax, Km, inhibition type, and environmental factors.
 
@@ -130,13 +130,13 @@ After you have installed **BioOpti**, you can try the Quick Start examples as fo
 
 3. **Copy and paste** the Quick Start code into the Python prompt.
 
-4. **Run the code**. You will see the result printed.
+4. **Run the code**. You will see the result printed in your terminal.
 
 ---
 
 ## 🤝 Contributors
 
-- **Clara Brgnz** — Project Lead, Package Infrastructure, Reaction Simulation Module
+- **Clara Bergonzi** — Package Infrastructure, Reaction Simulation Module
 - *(Add your teammates here if needed)*
 
 Feel free to open an issue or pull request if you would like to contribute! 🚀
