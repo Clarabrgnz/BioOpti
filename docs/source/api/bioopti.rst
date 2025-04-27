@@ -4,18 +4,10 @@ bioopti package
 Submodules
 ----------
 
-bioopti.enzyme\_kinetics module
--------------------------------
+bioopti.reaction\_simulator module
+----------------------------------
 
-.. automodule:: bioopti.enzyme_kinetics
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-bioopti.simulation module
--------------------------
-
-.. automodule:: bioopti.simulation
+.. automodule:: bioopti.reaction_simulator
    :members:
    :show-inheritance:
    :undoc-members:

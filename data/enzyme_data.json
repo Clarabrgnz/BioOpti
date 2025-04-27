@@ -1,38 +1,39 @@
 {
     "lactate dehydrogenase (Homo sapiens)": {
-        "km": 0.15,
-        "vmax": 120.0,
-        "optimal_pH": 7.4,
-        "optimal_temp": 37.0,
-        "ph_sigma": 1.0,
-        "temp_sigma": 5.0,
-        "ki": 0.2
+      "km_mM": 0.15,
+      "vmax_umol_per_min": 120.0,
+      "optimal_pH": 7.4,
+      "optimal_temp_C": 37.0,
+      "ph_sigma": 1.0,
+      "temp_sigma_C": 5.0,
+      "ki_mM": 0.2
     },
     "hexokinase (Homo sapiens)": {
-        "km": 0.05,
-        "vmax": 95.0,
-        "optimal_pH": 7.2,
-        "optimal_temp": 36.0,
-        "ph_sigma": 1.0,
-        "temp_sigma": 5.0,
-        "ki": 0.15
+      "km_mM": 0.05,
+      "vmax_umol_per_min": 95.0,
+      "optimal_pH": 7.2,
+      "optimal_temp_C": 36.0,
+      "ph_sigma": 1.0,
+      "temp_sigma_C": 5.0,
+      "ki_mM": 0.15
     },
     "alcohol dehydrogenase (Saccharomyces cerevisiae)": {
-        "km": 0.2,
-        "vmax": 150.0,
-        "optimal_pH": 6.8,
-        "optimal_temp": 30.0,
-        "ph_sigma": 0.8,
-        "temp_sigma": 4.0,
-        "ki": 0.25
+      "km_mM": 0.2,
+      "vmax_umol_per_min": 150.0,
+      "optimal_pH": 6.8,
+      "optimal_temp_C": 30.0,
+      "ph_sigma": 0.8,
+      "temp_sigma_C": 4.0,
+      "ki_mM": 0.25
     },
     "citrate synthase (Escherichia coli)": {
-        "km": 0.1,
-        "vmax": 80.0,
-        "optimal_pH": 7.5,
-        "optimal_temp": 37.0,
-        "ph_sigma": 1.2,
-        "temp_sigma": 5.0,
-        "ki": 0.3
+      "km_mM": 0.1,
+      "vmax_umol_per_min": 80.0,
+      "optimal_pH": 7.5,
+      "optimal_temp_C": 37.0,
+      "ph_sigma": 1.2,
+      "temp_sigma_C": 5.0,
+      "ki_mM": 0.3
     }
-}
+  }
+  
