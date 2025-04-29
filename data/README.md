@@ -10,7 +10,7 @@ This folder contains all the **local datasets** used by the BioOpti project.
 
 ---
 
-## 📄 Enzyme Kinetics Dataset
+## 🔬 Enzyme Kinetics Dataset
 
 - **Filename**: `enzyme_data.json`
 - **Format**: JSON file containing enzyme kinetics parameters.
@@ -19,7 +19,7 @@ This folder contains all the **local datasets** used by the BioOpti project.
     `"enzyme name (organism name)"`.
   - Each value is a dictionary of kinetic parameters.
 
-### Example
+### 📌 Example
 ```json
 {
   "lactate dehydrogenase (Homo sapiens)": {
