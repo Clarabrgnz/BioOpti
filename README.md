@@ -76,7 +76,6 @@ In order to use the Jupyter Notebook for demos or development:
 ```bash
 pip install jupyterlab
 ```
-
 ---
 
 ## 🛠️ Development Setup
@@ -86,9 +85,6 @@ If you're developing BioOpti or contributing to it, install in Editable Mode wit
 ```bash
 pip install -e ".[test,doc]"
 ```
-
-This installs BioOpti in *editable mode*, along with tools for testing and documentation.
-
 ---
 
 ## ✅ Running Tests
@@ -99,7 +95,6 @@ To run the test suite and check coverage:
 pip install tox
 tox
 ```
-
 ---
 
 ## ⚡ Quick Start
