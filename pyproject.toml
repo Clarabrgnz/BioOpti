@@ -1,3 +1,4 @@
+
 [build-system] 
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -9,7 +10,10 @@ requires-python = ">=3.10"
 license = {file = "LICENSE"}
 description = "toolkit for optimizing biochemical processes, including enzyme reaction rates and culture media"
 dependencies = [
-    # "rdkit",
+    "numpy",
+    "scipy",
+    "matplotlib",
+    "pandas"
 ]
 authors = [
     {name = "Clara", email = "clarabergonzi@gmail.com"}
