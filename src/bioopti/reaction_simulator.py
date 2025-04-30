@@ -162,14 +162,14 @@ def optimize_reaction(enzyme_params):
     ]
 
     def objective(x):
-        substrate_conc, pH, temp = x
+        substrate_conc, ph, temp = x
         return -simulate_reaction_rate(
             substrate_conc=substrate_conc,
             vmax=enzyme_params['vmax'],
             km=enzyme_params['km'],
-            pH=pH,
+            ph=ph,
             temp=temp,
-            optimal_pH=enzyme_params['optimal_pH'],
+            optimal_ph=enzyme_params['optimal_ph'],
             optimal_temp=enzyme_params['optimal_temp'],
             ph_sigma=enzyme_params.get('ph_sigma', 1.0),
             temp_sigma=enzyme_params.get('temp_sigma', 5.0),
