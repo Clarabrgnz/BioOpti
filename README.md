@@ -35,41 +35,62 @@ Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it
 
 ## 🚀 Installation
 
-First, create a new environment (feel free to use a different environment name if you prefer):
+### 1.🔄 Clone the Repository
+
+First, choose a location on your computer where you want to store the project. For example, you can use your `Documents` folder.
+Open your terminal and run:
+
+```bash
+cd ~/Documents  # or any folder where you want to store the project
+git clone https://github.com/Clarabrgnz/BioOpti.git
+cd BioOpti
+```
+
+This will create a folder named `BioOpti` containing all the project files.
+
+---
+
+### 2.🐍 Create and Activate a Python Environment
+
+Then, create a new environment (feel free to use a different environment name if you prefer):
 
 ```bash
 conda create -n bioopti python=3.10
 conda activate bioopti
+```
+---
+
+### 3.📥 Install the Package
+
+Make sure you are inside the `BioOpti` folder and run:
+
+```bash
 pip install .
 ```
+---
 
-If you need JupyterLab for interactive notebooks:
+### 4.📓 Install JupyterLab
+
+In order to use the Jupyter Notebook for demos or development:
 
 ```bash
 pip install jupyterlab
+jupyter lab
 ```
+
 ---
 
 ## 🛠️ Development Setup
 
-If you're setting up development from scratch, initialize Git and push to your GitHub repository (`https://github.com/Clarabrgnz/BioOpti`):
+If you're developing BioOpti or contributing to it:
 
-```bash
-git init
-git add *
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin git@github.com:Clarabrgnz/BioOpti.git
-git push -u origin main
-```
-
-For local development (install with testing and documentation dependencies):
-
+### Install in Editable Mode with Extra Dependencies
 
 ```bash
 pip install -e ".[test,doc]"
 ```
+
+This installs BioOpti in *editable mode*, along with tools for testing and documentation.
 
 ---
 
