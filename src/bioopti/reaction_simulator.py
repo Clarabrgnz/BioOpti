@@ -1,6 +1,7 @@
 import os #For working with file paths
 import json #To read the enzyme data from a .json file
 import math #For mathematical operations
+from scipy.optimize import differential_evolution
 
 def load_local_enzyme_data(filepath):
     """Load enzyme kinetics data from a local JSON file."""
@@ -151,4 +152,35 @@ def simulate_from_local_data(
     )
     # Return the computed reaction rate and the parameters used for simulation
     return v, local_params
+
+
+def optimize_reaction(enzyme_params):
+    bounds = [
+        (0.01, 10.0),    # substrate_conc
+        (4.0, 9.0),      # pH
+        (20.0, 60.0),    # temp
+    ]
+
+    def objective(x):
+        substrate_conc, pH, temp = x
+        return -simulate_reaction_rate(
+            substrate_conc=substrate_conc,
+            vmax=enzyme_params['vmax'],
+            km=enzyme_params['km'],
+            pH=pH,
+            temp=temp,
+            optimal_pH=enzyme_params['optimal_pH'],
+            optimal_temp=enzyme_params['optimal_temp'],
+            ph_sigma=enzyme_params.get('ph_sigma', 1.0),
+            temp_sigma=enzyme_params.get('temp_sigma', 5.0),
+            inhibitor_conc=enzyme_params.get('inhibitor_conc'),
+            ki=enzyme_params.get('ki')
+        )
+
+    result = differential_evolution(objective, bounds)
+
+    return {
+        "best_conditions": result.x,
+        "max_rate": -result.fun
+    }
 
