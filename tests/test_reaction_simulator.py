@@ -2,13 +2,18 @@ import pytest  # type: ignore #Testing framework
 import tempfile #To create temporary files (for simulating real JSON files).
 import json  #To write and read JSON data
 import os #To handle file paths and remove temporary files
+import sys
+import scipy
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
+from scipy.optimize import differential_evolution
 from bioopti.reaction_simulator import ( #Import the functions to be tested
     load_local_enzyme_data,
     normalize_keys,
     get_enzyme_kinetics,
     simulate_reaction_rate,
-    simulate_from_local_data
+    simulate_from_local_data,
+    optimize_reaction
 )
 
 # --------------------- Fixtures ---------------------
@@ -153,3 +158,17 @@ def test_simulate_from_local_data(monkeypatch):
     assert "km" in params
     assert "optimal_pH" in params
     assert "optimal_temp" in params
+
+def main():
+    print("✅ RUNNING THE UPDATED VERSION ✅")
+    enzyme = get_enzyme_kinetics("lactate dehydrogenase", "Homo sapiens")  # Replace with your enzyme
+    result = optimize_reaction(enzyme)
+
+    print("Optimal Conditions:")
+    print(f"Substrate Concentration: {result['best_conditions'][0]:.2f} mM")
+    print(f"pH: {result['best_conditions'][1]:.2f}")
+    print(f"Temperature: {result['best_conditions'][2]:.2f} °C")
+    print(f"Maximum Reaction Rate: {result['max_rate']:.2f} µmol/min")
+
+if __name__ == "__main__":
+    main()
