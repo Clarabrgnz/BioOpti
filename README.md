@@ -35,7 +35,7 @@ Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it
 
 ## 🚀 Installation
 
-### 1.🔄 Clone the Repository
+### 🔄 Clone the Repository
 
 First, choose a location on your computer where you want to store the project. For example, you can use your `Documents` folder.
 Open your terminal and run:
@@ -50,7 +50,7 @@ This will create a folder named `BioOpti` containing all the project files.
 
 ---
 
-### 2.🐍 Create and Activate a Python Environment
+### 🐍 Create and Activate a Python Environment
 
 Then, create a new environment (feel free to use a different environment name if you prefer):
 
@@ -60,7 +60,7 @@ conda activate bioopti
 ```
 ---
 
-### 3.📥 Install the Package
+### 📥 Install the Package
 
 Make sure you are inside the `BioOpti` folder and run:
 
@@ -69,7 +69,7 @@ pip install .
 ```
 ---
 
-### 4.📓 Install JupyterLab
+### 📓 Install JupyterLab
 
 In order to use the Jupyter Notebook for demos or development:
 
@@ -160,8 +160,6 @@ After you have installed **BioOpti**, you can try the Quick Start examples as fo
 - **Clara Bergonzi** — Package Infrastructure, Reaction Simulation Module
 - *(Add your teammates here if needed)*
 
-Feel free to open an issue or pull request if you would like to contribute! 🚀
-
 ---
 
 ## ⚖️ License
@@ -172,4 +170,4 @@ See the [LICENSE](LICENSE) file for full details.
 
 ---
 
-🚀 Happy optimizing with BioOpti! 🚀
+🚀 Happy optimizing with BioOpti 🚀
