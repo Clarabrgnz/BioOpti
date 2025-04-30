@@ -82,9 +82,7 @@ jupyter lab
 
 ## 🛠️ Development Setup
 
-If you're developing BioOpti or contributing to it:
-
-### Install in Editable Mode with Extra Dependencies
+If you're developing BioOpti or contributing to it, install in Editable Mode with Extra Dependencies
 
 ```bash
 pip install -e ".[test,doc]"
