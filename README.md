@@ -57,7 +57,7 @@ If you're setting up development from scratch, initialize Git and push to your G
 ```bash
 git init
 git add *
-git add .*
+git add .
 git commit -m "Initial commit"
 git branch -M main
 git remote add origin git@github.com:Clarabrgnz/BioOpti.git
