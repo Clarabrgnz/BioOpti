@@ -75,7 +75,6 @@ In order to use the Jupyter Notebook for demos or development:
 
 ```bash
 pip install jupyterlab
-jupyter lab
 ```
 
 ---
@@ -132,25 +131,6 @@ rate = simulate_reaction_rate(
 
 print(f"Simulated reaction rate: {rate:.2f} µmol/min")
 ```
----
-### ⁉️ How to Use This Quick Start Example
-
-After you have installed **BioOpti**, you can try the Quick Start examples as follows
-
-1. **Activate your environment** where BioOpti is installed:
-   ```bash
-   conda activate bioopti
-   ```
-
-2. **Open a Python interpreter** by typing:
-   ```bash
-   python
-   ```
-
-3. **Copy and paste** the Quick Start code into the Python prompt.
-
-4. **Run the code**. You will see the result printed in your terminal.
-
 ---
 
 ## 🤝 Contributors
