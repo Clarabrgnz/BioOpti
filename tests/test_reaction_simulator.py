@@ -160,7 +160,6 @@ def test_simulate_from_local_data(monkeypatch):
     assert "optimal_temp" in params
 
 def main():
-    print("✅ RUNNING THE UPDATED VERSION ✅")
     enzyme = get_enzyme_kinetics("lactate dehydrogenase", "Homo sapiens")  # Replace with your enzyme
     result = optimize_reaction(enzyme)
 
