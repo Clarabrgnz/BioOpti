@@ -66,7 +66,7 @@ def simulate_reaction_rate(
     km,                    # Michaelis constant Km in mM
     ph,                    # current pH of the system
     temp,                  # current temperature in °C
-    optimal_ph=7.0,        # enzyme's optimal pH
+    optimal_pH=7.0,        # enzyme's optimal pH
     optimal_temp=37.0,     # enzyme's optimal temperature
     ph_sigma=1.0,          # enzyme’s tolerance to pH deviation
     temp_sigma=5.0,        # enzyme’s tolerance to temperature deviation
@@ -85,7 +85,7 @@ def simulate_reaction_rate(
     v = (vmax * substrate_conc) / (km_effective + substrate_conc) #Computes the base reaction rate using the Michaelis-Menten equation
 
     temp_penalty = math.exp(-((temp - optimal_temp) ** 2) / (2 * temp_sigma ** 2))
-    ph_penalty = math.exp(-((ph - optimal_ph) ** 2) / (2 * ph_sigma ** 2))
+    ph_penalty = math.exp(-((ph - optimal_pH) ** 2) / (2 * ph_sigma ** 2))
     #Applies Gaussian penalties for temperature and pH deviations
     v *= temp_penalty * ph_penalty
     #Applies both penalties to the reaction rate to simulate environmental effects
@@ -143,7 +143,7 @@ def simulate_from_local_data(
         km=local_params["km"],
         ph=ph,
         temp=temp,
-        optimal_ph=local_params["optimal_pH"],
+        optimal_pH=local_params["optimal_pH"],
         optimal_temp=local_params["optimal_temp"],
         ph_sigma=ph_sigma if ph_sigma is not None else local_params["ph_sigma"],
         temp_sigma=temp_sigma if temp_sigma is not None else local_params["temp_sigma"],
@@ -169,7 +169,7 @@ def optimize_reaction(enzyme_params):
             km=enzyme_params['km'],
             ph=ph,
             temp=temp,
-            optimal_ph=enzyme_params['optimal_ph'],
+            optimal_pH=enzyme_params['optimal_pH'],
             optimal_temp=enzyme_params['optimal_temp'],
             ph_sigma=enzyme_params.get('ph_sigma', 1.0),
             temp_sigma=enzyme_params.get('temp_sigma', 5.0),
