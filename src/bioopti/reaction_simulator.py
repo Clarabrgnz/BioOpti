@@ -1,13 +1,13 @@
-import os #For working with file paths
-import json #To read the enzyme data from a .json file
-import math #For mathematical operations
-from scipy.optimize import differential_evolution
+import os # For working with file paths
+import json # To read the enzyme data from a .json file
+import math # For mathematical operations
+from scipy.optimize import differential_evolution # For optimization of reaction conditions
 
 def load_local_enzyme_data(filepath):
     """Load enzyme kinetics data from a local JSON file."""
-    if not os.path.exists(filepath): #Checks if the file exists
+    if not os.path.exists(filepath): # Checks if the file exists
         raise FileNotFoundError(f"Could not find the JSON file at {filepath}") #If not, raises an error
-    with open(filepath, "r") as file: #Opens the file in read mode and loads the data
+    with open(filepath, "r") as file: # Opens the file in read mode and loads the data
         data = json.load(file)
     return data
 
@@ -16,7 +16,7 @@ def normalize_keys(param_dict):
     Convert unit-tagged keys to generic keys, 
     but preserve already normalized keys.
     """
-    key_mapping = { #Creates a dictionary that maps the unit-tagged keys (from the .json) to generic ones
+    key_mapping = { # Creates a dictionary that maps the unit-tagged keys (from the .json) to generic ones
         "km_mM": "km",
         "vmax_umol_per_min": "vmax",
         "optimal_pH": "optimal_pH",
@@ -30,7 +30,7 @@ def normalize_keys(param_dict):
         if k in key_mapping:
             normalized[key_mapping[k]] = v
         else:
-            normalized[k] = v  #Keeps the key as it is if it's already normalized
+            normalized[k] = v  # Keeps the key as it is if it's already normalized
     return normalized
 
 
@@ -38,26 +38,26 @@ def get_enzyme_kinetics(enzyme_name, organism=None, filepath=None):
     """
     Fetches kinetic parameters for a given enzyme from a local JSON file.
     """
-    if filepath is None: #If the user didn’t specify a path, finds the default path: data/enzyme_data.json
+    if filepath is None: # If the user didn’t specify a path, finds the default path: data/enzyme_data.json
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
         filepath = os.path.join(project_root, "data", "enzyme_data.json")
 
-    print(f"📁 Loading enzyme data from: {filepath}") #Prints out where the file is being loaded from
+    print(f"📁 Loading enzyme data from: {filepath}") # Prints out where the file is being loaded from
 
-    data = load_local_enzyme_data(filepath) #Uses the previous function to load the JSON data into a Python dictionary
+    data = load_local_enzyme_data(filepath) # Uses the previous function to load the JSON data into a Python dictionary
 
-    matches = [] #Creates an empty list to store matches in case multiple entries exist for the same enzyme
+    matches = [] # Creates an empty list to store matches in case multiple entries exist for the same enzyme
 
-    for key, params in data.items(): #Splits the key into enzyme name and organism
+    for key, params in data.items(): # Splits the key into enzyme name and organism
         enzyme, org = key.rsplit(" (", 1)
         org = org.rstrip(")")
         if enzyme.lower() == enzyme_name.lower() and (organism is None or organism.lower() == org.lower()): #Checks if the enzyme name and organism match the user’s input
-            matches.append(normalize_keys(params)) #If they do, appends the parameters to the matches list
+            matches.append(normalize_keys(params)) # If they do, appends the parameters to the matches list
 
-    if not matches: #If no matches were found, raises an error
+    if not matches: # If no matches were found, raises an error
         raise ValueError(f"No match found for enzyme '{enzyme_name}' with organism '{organism}'.")
 
-    return matches[0] #Returns the first match found (if multiple matches exist, the first one is returned)
+    return matches[0] # Returns the first match found (if multiple matches exist, the first one is returned)
 
 
 def simulate_reaction_rate(
@@ -78,19 +78,19 @@ def simulate_reaction_rate(
     Calculates enzymatic reaction rate using Michaelis-Menten model
     with temperature and pH Gaussian penalties and optional inhibition.
     """
-    km_effective = km #Uses default km unless modified by inhibition
-    if inhibitor_conc is not None and ki is not None: #If the user provided an inhibitor concentration and ki value, modifies the km value according to the competitive inhibition formula
+    km_effective = km # Uses default km unless modified by inhibition
+    if inhibitor_conc is not None and ki is not None: # If the user provided an inhibitor concentration and ki value, modifies the km value according to the competitive inhibition formula
         km_effective = km * (1 + inhibitor_conc / ki)
 
-    v = (vmax * substrate_conc) / (km_effective + substrate_conc) #Computes the base reaction rate using the Michaelis-Menten equation
+    v = (vmax * substrate_conc) / (km_effective + substrate_conc) # Computes the base reaction rate using the Michaelis-Menten equation
 
     temp_penalty = math.exp(-((temp - optimal_temp) ** 2) / (2 * temp_sigma ** 2))
     ph_penalty = math.exp(-((ph - optimal_pH) ** 2) / (2 * ph_sigma ** 2))
-    #Applies Gaussian penalties for temperature and pH deviations
+    # Applies Gaussian penalties for temperature and pH deviations
     v *= temp_penalty * ph_penalty
     #Applies both penalties to the reaction rate to simulate environmental effects
     return v
-    #Returns the final simulated reaction rate in µmol/min
+    # Returns the final simulated reaction rate in µmol/min
 
 def simulate_from_local_data(
     enzyme_name,
@@ -129,12 +129,12 @@ def simulate_from_local_data(
             - local_params (dict): Dictionary of kinetic and environmental parameters used.
     """
  
-    local_params = get_enzyme_kinetics( #Uses the get_enzyme_kinetics function to load the data for the given enzyme and organism
+    local_params = get_enzyme_kinetics( # Uses the get_enzyme_kinetics function to load the data for the given enzyme and organism
         enzyme_name=enzyme_name,
         organism=organism
     )
 
-    v = simulate_reaction_rate( #Uses the simulate_reaction_rate function to compute the reaction rate
+    v = simulate_reaction_rate( # Uses the simulate_reaction_rate function to compute the reaction rate
     # User inputs: substrate_conc, ph, temp, inhibitor_conc
     # Loaded from JSON: vmax, km, optimal_ph, optimal_temp, ph_sigma, temp_sigma, ki
     # If the user provided ph_sigma, temp_sigma, or ki, those override the JSON values
@@ -155,15 +155,52 @@ def simulate_from_local_data(
 
 
 def optimize_reaction(enzyme_params):
-    bounds = [
-        (0.01, 10.0),    # substrate_conc
+    bounds = [ # Define the bounds for the optimization
+        (0.01, 10.0),    # Substrate concentration in mM
         (4.0, 9.0),      # pH
-        (20.0, 60.0),    # temp
+        (20.0, 60.0),    # Temperature in °C
     ]
+    """
+    Optimize enzymatic reaction conditions to maximize the reaction rate.
 
+    This function uses a global optimization algorithm (Differential Evolution)
+    to find the optimal substrate concentration, pH, and temperature
+    that maximize the reaction rate simulated by `simulate_reaction_rate`.
+
+    Parameters:
+        enzyme_params : dict
+            A dictionary containing enzyme-specific parameters:
+
+            - vmax (float): Maximum reaction velocity (Vmax).
+            - km (float): Michaelis constant (Km).
+            - optimal_pH (float): pH at which the enzyme is most active.
+            - optimal_temp (float): Temperature (°C) at which the enzyme is most active.
+            - ph_sigma (float, optional): Standard deviation of the pH activity profile.
+            Defaults to 1.0.
+            - temp_sigma (float, optional): Standard deviation of the temperature activity profile.
+            Defaults to 5.0.
+            - inhibitor_conc (float, optional): Concentration of inhibitor present.
+            - ki (float, optional): Inhibition constant (Ki).
+
+    Returns:
+        dict
+            A dictionary with the following keys:
+
+            - best_conditions (numpy.ndarray): Array of optimized values [substrate_conc, pH, temp].
+            - max_rate (float): Maximum reaction rate achieved under the optimized conditions.
+
+    Notes:
+        - The search bounds for the optimization are:
+        * substrate concentration: 0.01 to 10.0 (units consistent with Vmax and Km)
+        * pH: 4.0 to 9.0
+        * temperature: 20.0 to 60.0 °C
+        - The objective function returns the negative of the reaction rate because
+        `differential_evolution` minimizes the objective.
+    """
+    # Define the objective function for optimization 
     def objective(x):
-        substrate_conc, ph, temp = x
-        return -simulate_reaction_rate(
+        substrate_conc, ph, temp = x # Takes a vector x with substrate concentration, pH, and temperature
+        return -simulate_reaction_rate( # Calls the simulate_reaction_rate function to compute the reaction rate
             substrate_conc=substrate_conc,
             vmax=enzyme_params['vmax'],
             km=enzyme_params['km'],
@@ -176,9 +213,9 @@ def optimize_reaction(enzyme_params):
             inhibitor_conc=enzyme_params.get('inhibitor_conc'),
             ki=enzyme_params.get('ki')
         )
-
+    # Perform the optimization using differential evolution
     result = differential_evolution(objective, bounds)
-
+    # Returns the optimized conditions and the maximum reaction rate
     return {
         "best_conditions": result.x,
         "max_rate": -result.fun

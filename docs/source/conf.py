@@ -37,60 +37,67 @@ except ImportError:
 
 output_dir = os.path.join(__location__, "api")
 module_dir = os.path.join(__location__, "../../src/bioopti")
-try:
-    shutil.rmtree(output_dir)
-except FileNotFoundError:
-    pass
+# Clean up old generated files
+shutil.rmtree(output_dir, ignore_errors=True)
 
+# Invoke sphinx-apidoc
 try:
     import sphinx
-
-    cmd_line = f"sphinx-apidoc --implicit-namespaces -f -o {output_dir} {module_dir}"
-
-    args = cmd_line.split(" ")
-    if tuple(sphinx.__version__.split(".")) >= ("1", "7"):
-        # This is a rudimentary parse_version to avoid external dependencies
-        args = args[1:]
-
+    cmd = f"sphinx-apidoc --implicit-namespaces -f -o {output_dir} {module_dir}"
+    args = cmd.split()[1:]  # drop the “sphinx-apidoc” part
     apidoc.main(args)
 except Exception as e:
-    print(f"Running `sphinx-apidoc` failed!\n{e}")
+    print(f"Running sphinx-apidoc failed: {e}")
 
-# -- Project information
+# -- Project information -----------------------------------------------------
 
-_metadata = metadata("BioOpti")
-
-project = _metadata["Name"]
-author = _metadata["Author-email"].split("<", 1)[0].strip()
+_md = metadata("BioOpti")
+project   = _md["Name"]
+author    = _md["Author-email"].split("<", 1)[0].strip()
 copyright = f"2024, {author}"
+version   = _md["Version"]
+release   = ".".join(version.split(".")[:2])
 
-version = _metadata["Version"]
-release = ".".join(version.split(".")[:2])
-
-
-# -- General configuration
+# -- General configuration ---------------------------------------------------
 
 extensions = [
-    "myst_parser",
-    "sphinx_copybutton",
-    "sphinx.ext.autodoc",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.viewcode",
+    "myst_parser",              # Markdown support
+    "sphinx_copybutton",        # “Copy” buttons on code blocks
+    "sphinx.ext.autodoc",       # Pull in docstrings
+    "sphinx.ext.intersphinx",   # Link to other projects’ docs
+    "sphinx.ext.viewcode",      # Add links to source code
+    "sphinx.ext.autosectionlabel",  # Auto‑generate labels for sections
 ]
 
-templates_path = ["_templates"]
+# -- MyST Parser configuration -----------------------------------------------
 
-exclude_patterns = [
-    "Thumbs.db",
-    ".DS_Store",
-    ".ipynb_checkpoints",
+# Generate HTML anchors for headings up to level 3 (##, ###)
+myst_heading_anchors = 3
+
+# Promote the first Markdown heading to the document title
+myst_title_to_header = True
+
+# Suppress MyST warnings for:
+#  • missing cross‑ref targets (“xref-missing”)
+#  • documents starting at H2 instead of H1 (“header”)
+myst_suppress_warnings = [
+    "xref-missing",
+    "header",
 ]
 
-suppress_warnings = [
-    'myst.header'
-]
+# -- (Optional) Sphinx core warning suppressions -----------------------------
 
-# -- Options for HTML output
+# If you ever need to silence core Sphinx warnings, you can list them here.
+suppress_warnings = []
+
+# -- Options for HTML output -------------------------------------------------
 
 html_theme = "furo"
 html_static_path = ["_static"]
+
+# -- Intersphinx configuration ----------------------------------------------
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "sphinx": ("https://www.sphinx-doc.org/en/master", None),
+}

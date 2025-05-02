@@ -1,7 +1,7 @@
 ![Project Logo](assets/banner.png)  
 ![Coverage Status](assets/coverage-badge.svg)
 
-<h1 align="center">BioOpti 🧪</h1>
+<h1 align="center"> 🧪 BioOpti 🧪</h1>
 
 <br>
 
@@ -14,7 +14,7 @@ Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it
 
 - [✨ Features](#-features)
 - [🚀 Installation](#-installation)
-- [🛠 Development Setup](#%-development-setup)
+- [🛠 Development Setup](#-development-setup)
 - [✅ Running Tests](#-running-tests)
 - [⚡ Quick Start](#-quick-start)
 - [🤝 Contributors](#-contributors)
@@ -104,7 +104,7 @@ tox
 
 ### ➞ Simulating Enzymatic Reactions
 This example shows how to simulate the rate of an enzyme-catalyzed reaction using known kinetic parameters.
-Provide experimental conditions such as substrate concentration, Vmax, Km, pH, temperature, and optional inhibitor information, and BioOpti will then calculate the expected reaction rate (µmol/min) under these specific conditions, taking into account the effects of pH, temperature, and competitive inhibition if specified.
+Provide experimental conditions such as substrate concentration, Vmax, Km, pH, temperature, and optional inhibitor information, and the function simulate_reaction_rate will calculate the expected reaction rate (µmol/min) under these specific conditions.
 
 ```python
 from bioopti.reaction_simulator import simulate_reaction_rate
@@ -116,7 +116,7 @@ rate = simulate_reaction_rate(
     km=0.5,                # Km in mM
     ph=6.8,                # current pH
     temp=35.0,             # current temperature °C
-    optimal_ph=7.0,        # enzyme's optimal pH
+    optimal_pH=7.0,        # enzyme's optimal pH
     optimal_temp=37.0,     # enzyme's optimal temperature
     ph_sigma=1.0,          # pH tolerance
     temp_sigma=5.0,        # temperature tolerance
@@ -131,7 +131,7 @@ print(f"Simulated reaction rate: {rate:.2f} µmol/min")
 ## 🤝 Contributors
 
 - **Clara Bergonzi** — Package Infrastructure, Reaction Simulation Module
-- *(Add your teammates here if needed)*
+- *(Add your teammates here)*
 
 ---
 
