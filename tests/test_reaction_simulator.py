@@ -1,12 +1,13 @@
+import bioopti  # Import the bioopti module
 import pytest  # type: ignore #Testing framework
 import tempfile #To create temporary files (for simulating real JSON files).
 import json  #To write and read JSON data
 import os #To handle file paths and remove temporary files
-import sys
-import scipy
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+from scipy.optimize import differential_evolution #For optimization functions
+import sys #To add the src directory to the path for importing bioopti
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src'))) #Adds the src directory to the Python path so that the bioopti module can be imported
 
-from scipy.optimize import differential_evolution
+
 from bioopti.reaction_simulator import ( #Import the functions to be tested
     load_local_enzyme_data,
     normalize_keys,
@@ -171,3 +172,25 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# --- Testing optimize_reaction ---
+
+def test_optimize_reaction_smoke():
+    # simple enzyme with known optimum at substrate→large, pH/temp→optimal
+    enzyme = {
+        "vmax": 100.0,
+        "km": 0.1,
+        "optimal_pH": 7.0,
+        "optimal_temp": 37.0,
+        "ph_sigma": 0.5,
+        "temp_sigma": 5.0
+    }
+    out = bioopti.reaction_simulator.optimize_reaction(enzyme)
+    assert "best_conditions" in out and "max_rate" in out
+    bc = out["best_conditions"]
+    assert len(bc) == 3
+    # best_conditions should lie within your bounds
+    assert 0.01 <= bc[0] <= 10.0
+    assert 4.0 <= bc[1] <= 9.0
+    assert 20.0 <= bc[2] <= 60.0
+    assert out["max_rate"] >= 0.0
