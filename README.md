@@ -1,10 +1,6 @@
 ![Project Logo](assets/banner.png)  
 ![Coverage Status](assets/coverage-badge.svg)
 
-<h1 align="center"> 🧪 BioOpti 🧪</h1>
-
-<br>
-
 **BioOpti** was created to help optimizing biochemical workflows, from culture media formulation to enzymatic reaction simulations.  
 Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it simple to model, predict, and refine experimental setups.
 
@@ -114,11 +110,11 @@ rate = simulate_reaction_rate(
     substrate_conc=2.5,    # [S] in mM
     vmax=1.8,              # Vmax in µmol/min
     km=0.5,                # Km in mM
-    ph=6.8,                # current pH
+    pH=6.8,                # current pH
     temp=35.0,             # current temperature °C
     optimal_pH=7.0,        # enzyme's optimal pH
     optimal_temp=37.0,     # enzyme's optimal temperature
-    ph_sigma=1.0,          # pH tolerance
+    pH_sigma=1.0,          # pH tolerance
     temp_sigma=5.0,        # temperature tolerance
     inhibitor_conc=0.1,    # inhibitor concentration [I] in mM
     ki=0.05                # inhibition constant Ki in mM

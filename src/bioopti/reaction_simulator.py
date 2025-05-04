@@ -21,7 +21,7 @@ def normalize_keys(param_dict):
         "vmax_umol_per_min": "vmax",
         "optimal_pH": "optimal_pH",
         "optimal_temp_C": "optimal_temp",
-        "ph_sigma": "ph_sigma",
+        "pH_sigma": "pH_sigma",
         "temp_sigma_C": "temp_sigma",
         "ki_mM": "ki"
     }
@@ -64,11 +64,11 @@ def simulate_reaction_rate(
     substrate_conc,        # substrate concentration [S] in mM
     vmax,                  # maximum reaction rate Vmax in µmol/min
     km,                    # Michaelis constant Km in mM
-    ph,                    # current pH of the system
+    pH,                    # current pH of the system
     temp,                  # current temperature in °C
     optimal_pH=7.0,        # enzyme's optimal pH
     optimal_temp=37.0,     # enzyme's optimal temperature
-    ph_sigma=1.0,          # enzyme’s tolerance to pH deviation
+    pH_sigma=1.0,          # enzyme’s tolerance to pH deviation
     temp_sigma=5.0,        # enzyme’s tolerance to temperature deviation
     inhibitor_conc=None,   # inhibitor concentration [I] in mM (optional)
     ki=None                # inhibition constant Ki in mM (optional)
@@ -85,9 +85,9 @@ def simulate_reaction_rate(
     v = (vmax * substrate_conc) / (km_effective + substrate_conc) # Computes the base reaction rate using the Michaelis-Menten equation
 
     temp_penalty = math.exp(-((temp - optimal_temp) ** 2) / (2 * temp_sigma ** 2))
-    ph_penalty = math.exp(-((ph - optimal_pH) ** 2) / (2 * ph_sigma ** 2))
+    pH_penalty = math.exp(-((pH - optimal_pH) ** 2) / (2 * pH_sigma ** 2))
     # Applies Gaussian penalties for temperature and pH deviations
-    v *= temp_penalty * ph_penalty
+    v *= temp_penalty * pH_penalty
     #Applies both penalties to the reaction rate to simulate environmental effects
     return v
     # Returns the final simulated reaction rate in µmol/min
@@ -96,10 +96,10 @@ def simulate_from_local_data(
     enzyme_name,
     organism=None,
     substrate_conc=1.0,
-    ph=7.0,
+    pH=7.0,
     temp=37.0,
     inhibitor_conc=None,
-    ph_sigma=None,
+    pH_sigma=None,
     temp_sigma=None,
     ki=None
     ):
@@ -116,10 +116,10 @@ def simulate_from_local_data(
         enzyme_name (str): Name of the enzyme (e.g., "hexokinase").
         organism (str, optional): Species of origin (e.g., "Homo sapiens"). If None, matches any.
         substrate_conc (float, optional): Substrate concentration [S] in mM (default: 1.0).
-        ph (float, optional): Current pH of the environment (default: 7.0).
+        pH (float, optional): Current pH of the environment (default: 7.0).
         temp (float, optional): Current temperature in °C (default: 37.0).
         inhibitor_conc (float, optional): Inhibitor concentration [I] in mM (default: None).
-        ph_sigma (float, optional): Override for pH tolerance (if None, uses JSON value).
+        pH_sigma (float, optional): Override for pH tolerance (if None, uses JSON value).
         temp_sigma (float, optional): Override for temperature tolerance (if None, uses JSON value).
         ki (float, optional): Override for inhibition constant Ki in mM (if None, uses JSON value).
 
@@ -135,17 +135,17 @@ def simulate_from_local_data(
     )
 
     v = simulate_reaction_rate( # Uses the simulate_reaction_rate function to compute the reaction rate
-    # User inputs: substrate_conc, ph, temp, inhibitor_conc
-    # Loaded from JSON: vmax, km, optimal_ph, optimal_temp, ph_sigma, temp_sigma, ki
-    # If the user provided ph_sigma, temp_sigma, or ki, those override the JSON values
+    # User inputs: substrate_conc, pH, temp, inhibitor_conc
+    # Loaded from JSON: vmax, km, optimal_pH, optimal_temp, pH_sigma, temp_sigma, ki
+    # If the user provided pH_sigma, temp_sigma, or ki, those override the JSON values
         substrate_conc=substrate_conc,
         vmax=local_params["vmax"],
         km=local_params["km"],
-        ph=ph,
+        pH=pH,
         temp=temp,
         optimal_pH=local_params["optimal_pH"],
         optimal_temp=local_params["optimal_temp"],
-        ph_sigma=ph_sigma if ph_sigma is not None else local_params["ph_sigma"],
+        pH_sigma=pH_sigma if pH_sigma is not None else local_params["pH_sigma"],
         temp_sigma=temp_sigma if temp_sigma is not None else local_params["temp_sigma"],
         inhibitor_conc=inhibitor_conc,
         ki=ki if ki is not None else local_params.get("ki")
@@ -175,7 +175,7 @@ def optimize_reaction(enzyme_params):
             - km (float): Michaelis constant (Km).
             - optimal_pH (float): pH at which the enzyme is most active.
             - optimal_temp (float): Temperature (°C) at which the enzyme is most active.
-            - ph_sigma (float, optional): Standard deviation of the pH activity profile.
+            - pH_sigma (float, optional): Standard deviation of the pH activity profile.
             Defaults to 1.0.
             - temp_sigma (float, optional): Standard deviation of the temperature activity profile.
             Defaults to 5.0.
@@ -199,16 +199,16 @@ def optimize_reaction(enzyme_params):
     """
     # Define the objective function for optimization 
     def objective(x):
-        substrate_conc, ph, temp = x # Takes a vector x with substrate concentration, pH, and temperature
+        substrate_conc, pH, temp = x # Takes a vector x with substrate concentration, pH, and temperature
         return -simulate_reaction_rate( # Calls the simulate_reaction_rate function to compute the reaction rate
             substrate_conc=substrate_conc,
             vmax=enzyme_params['vmax'],
             km=enzyme_params['km'],
-            ph=ph,
+            pH=pH,
             temp=temp,
             optimal_pH=enzyme_params['optimal_pH'],
             optimal_temp=enzyme_params['optimal_temp'],
-            ph_sigma=enzyme_params.get('ph_sigma', 1.0),
+            pH_sigma=enzyme_params.get('pH_sigma', 1.0),
             temp_sigma=enzyme_params.get('temp_sigma', 5.0),
             inhibitor_conc=enzyme_params.get('inhibitor_conc'),
             ki=enzyme_params.get('ki')

@@ -28,7 +28,7 @@ def mock_enzyme_data():
             "km": 0.5,
             "optimal_pH": 7.0,
             "optimal_temp": 37.0,
-            "ph_sigma": 1.0,
+            "pH_sigma": 1.0,
             "temp_sigma": 5.0
         },
         "hexokinase (Saccharomyces cerevisiae)": {
@@ -36,7 +36,7 @@ def mock_enzyme_data():
             "km": 0.3,
             "optimal_pH": 7.5,
             "optimal_temp": 30.0,
-            "ph_sigma": 1.0,
+            "pH_sigma": 1.0,
             "temp_sigma": 5.0
         }
     }
@@ -70,7 +70,7 @@ def test_normalize_keys():
         "vmax_umol_per_min": 100.0,
         "optimal_pH": 7.0,
         "optimal_temp_C": 37.0,
-        "ph_sigma": 1.0,
+        "pH_sigma": 1.0,
         "temp_sigma_C": 5.0,
         "extra_param": 42
     }
@@ -79,7 +79,7 @@ def test_normalize_keys():
     assert normalized["vmax"] == 100.0
     assert normalized["optimal_pH"] == 7.0
     assert normalized["optimal_temp"] == 37.0
-    assert normalized["ph_sigma"] == 1.0
+    assert normalized["pH_sigma"] == 1.0
     assert normalized["temp_sigma"] == 5.0
     assert normalized["extra_param"] == 42  # extra keys should be preserved
 
@@ -107,7 +107,7 @@ def test_simulate_reaction_rate_basic():
         substrate_conc=1.0,
         vmax=100.0,
         km=0.5,
-        ph=7.0,
+        pH=7.0,
         temp=37.0
     )
     assert isinstance(rate, float)
@@ -120,14 +120,14 @@ def test_simulate_reaction_rate_with_inhibitor():
         substrate_conc=1.0,
         vmax=100.0,
         km=0.5,
-        ph=7.0,
+        pH=7.0,
         temp=37.0
     )
     rate_with_inhibitor = simulate_reaction_rate(
         substrate_conc=1.0,
         vmax=100.0,
         km=0.5,
-        ph=7.0,
+        pH=7.0,
         temp=37.0,
         inhibitor_conc=0.5,
         ki=0.1
@@ -148,7 +148,7 @@ def test_simulate_from_local_data(monkeypatch):
             "km": 0.4,
             "optimal_pH": 7.0,
             "optimal_temp": 37.0,
-            "ph_sigma": 1.0,
+            "pH_sigma": 1.0,
             "temp_sigma": 5.0
         }
     )
@@ -187,7 +187,7 @@ def test_optimize_reaction_smoke():
         "km": 0.1,
         "optimal_pH": 7.0,
         "optimal_temp": 37.0,
-        "ph_sigma": 0.5, # Narrow pH tolerance
+        "pH_sigma": 0.5, # Narrow pH tolerance
         "temp_sigma": 5.0 # Moderate temperature tolerance
     }
     # Runs the optimization function

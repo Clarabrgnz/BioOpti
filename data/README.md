@@ -4,9 +4,9 @@ This folder contains all the **local datasets** used by the BioOpti project.
 
 ---
 
-## 🧪 Medium Optimization Dataset (Planned)
+## 🧪 Medium Optimization Dataset
 
-🔧 **(To be completed in a future release.)**
+🔧 **(To be completed)**
 
 ---
 
@@ -27,7 +27,7 @@ This folder contains all the **local datasets** used by the BioOpti project.
     "km": 0.5,
     "optimal_pH": 7.0,
     "optimal_temp": 37.0,
-    "ph_sigma": 1.0,
+    "pH_sigma": 1.0,
     "temp_sigma": 5.0
   }
 }
@@ -43,7 +43,7 @@ This folder contains all the **local datasets** used by the BioOpti project.
 | `km` | Michaelis constant | mM |
 | `optimal_pH` | Optimal pH | - |
 | `optimal_temp` | Optimal temperature | °C |
-| `ph_sigma` | pH tolerance (σ value) | - |
+| `pH_sigma` | pH tolerance (σ value) | - |
 | `temp_sigma` | Temperature tolerance (σ value) | - |
 | `ki` *(optional)* | Inhibition constant (competitive) | mM |
 

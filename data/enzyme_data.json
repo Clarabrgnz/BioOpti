@@ -4,7 +4,7 @@
       "vmax_umol_per_min": 120.0,
       "optimal_pH": 7.4,
       "optimal_temp_C": 37.0,
-      "ph_sigma": 1.0,
+      "pH_sigma": 1.0,
       "temp_sigma_C": 5.0,
       "ki_mM": 0.2
     },
@@ -13,7 +13,7 @@
       "vmax_umol_per_min": 95.0,
       "optimal_pH": 7.2,
       "optimal_temp_C": 36.0,
-      "ph_sigma": 1.0,
+      "pH_sigma": 1.0,
       "temp_sigma_C": 5.0,
       "ki_mM": 0.15
     },
@@ -22,7 +22,7 @@
       "vmax_umol_per_min": 150.0,
       "optimal_pH": 6.8,
       "optimal_temp_C": 30.0,
-      "ph_sigma": 0.8,
+      "pH_sigma": 0.8,
       "temp_sigma_C": 4.0,
       "ki_mM": 0.25
     },
@@ -31,7 +31,7 @@
       "vmax_umol_per_min": 80.0,
       "optimal_pH": 7.5,
       "optimal_temp_C": 37.0,
-      "ph_sigma": 1.2,
+      "pH_sigma": 1.2,
       "temp_sigma_C": 5.0,
       "ki_mM": 0.3
     }
