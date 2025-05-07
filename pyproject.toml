@@ -13,7 +13,8 @@ dependencies = [
     "numpy",
     "scipy",
     "matplotlib",
-    "pandas"
+    "pandas",
+    "rich"
 ]
 authors = [
     {name = "Clara", email = "clarabergonzi@gmail.com"}
