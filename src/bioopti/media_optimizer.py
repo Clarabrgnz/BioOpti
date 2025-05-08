@@ -8,7 +8,7 @@ Requires:
 
 Usage:
   # CLI mode:
-  python improved_bacdive_cli.py "DSM 6128"
+  python media_optimizer.py "Bacillus subtilis"
 
   # Interactive mode (no args):
   python improved_bacdive_cli.py
