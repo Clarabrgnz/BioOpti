@@ -4,6 +4,14 @@ bioopti package
 Submodules
 ----------
 
+bioopti.media\_optimizer module
+-------------------------------
+
+.. automodule:: bioopti.media_optimizer
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 bioopti.reaction\_simulator module
 ----------------------------------
 

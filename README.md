@@ -6,19 +6,19 @@ Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it
 
 ---
 
-## 📚 Table of Contents
+# 📚 Table of Contents
 
-- [✨ Features](#-features)
-- [🚀 Installation](#-installation)
-- [🛠 Development Setup](#-development-setup)
-- [✅ Running Tests](#-running-tests)
-- [⚡ Quick Start](#-quick-start)
-- [🤝 Contributors](#-contributors)
-- [⚖️ License](#-license)
+- [Features](#features)
+- [Installation](#installation)
+- [Development Setup](#development-setup)
+- [Running Tests](#running-tests)
+- [Quick Start](#quick-start)
+- [Contributors](#contributors)
+- [License](#license)
 
 ---
 
-## ✨ Features
+## Features
 
 - 📈 **Culture Media Optimization** *(Coming soon)*:  
   Calculate optimal nutrient ratios to maximize organism growth or product yield.
@@ -29,7 +29,7 @@ Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### 🔄 Clone the Repository
 
@@ -74,7 +74,7 @@ pip install jupyterlab
 ```
 ---
 
-## 🛠️ Development Setup
+## Development Setup
 
 If you're developing BioOpti or contributing to it, install in Editable Mode with Extra Dependencies
 
@@ -83,7 +83,7 @@ pip install -e ".[test,doc]"
 ```
 ---
 
-## ✅ Running Tests
+## Running Tests
 
 To run the test suite and check coverage:
 
@@ -93,7 +93,7 @@ tox
 ```
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
 ### ➞ Culture Media Optimization
 *(Coming soon! 🚧)*
@@ -124,14 +124,14 @@ print(f"Simulated reaction rate: {rate:.2f} µmol/min")
 ```
 ---
 
-## 🤝 Contributors
+## Contributors
 
 - **Clara Bergonzi** — Package Infrastructure, Reaction Simulation Module
 - *(Add your teammates here)*
 
 ---
 
-## ⚖️ License
+## License
 
 This project is licensed under the **MIT License**.  
 You are free to use, modify, and distribute this software with appropriate attribution.  
