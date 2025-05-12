@@ -1,4 +1,13 @@
-import bioopti  # Import the bioopti module
+
+import os, sys, inspect
+# (make sure this path truly points at your src folder)
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+import bioopti.media_optimizer as mo
+
+print(">>> LOADED MEDIA_OPTIMIZER FROM:", inspect.getfile(mo))
+
+
+import bioopti.media_optimizer
 import pytest  # type: ignore #Testing framework
 import tempfile # To create temporary files (for simulating real JSON files).
 import json  # To write and read JSON data
@@ -13,6 +22,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 's
 
 from bioopti.media_optimizer import (
     get_bearer_token,
+    get_headers,
     search_ids,
     fetch_strain,
     extract_media,
@@ -70,7 +80,7 @@ def mock_requests(monkeypatch, token_resp, search_resp, strain_resp):
         if url.startswith(bioopti.media_optimizer.API_BASE_URL + "/fetch"):
             return strain_resp
         return DummyResponse({}, 404)
-    monkeypatch.setattr(bioopti.media_optimizer.requests, "get", fake_get)
+    monkeypatch.setattr(bioopti.media_optimizer.imizer.requests, "get", fake_get)
 
 
 # --------------------- Tests ---------------------
@@ -162,4 +172,94 @@ def test_run_no_ids(monkeypatch, capsys):
         run("none")
     out = capsys.readouterr().out
     assert "No strains found for 'none'" in out
+    assert e.value.code == 0
+
+def test_get_bearer_token_http_error(monkeypatch):
+    # simulate a 400 from the token endpoint
+    dummy = DummyResponse({}, status_code=400)
+    monkeypatch.setattr(requests, "post", lambda *a, **k: dummy)
+    with pytest.raises(requests.HTTPError):
+        get_bearer_token()
+
+def test_get_bearer_token_missing_token(monkeypatch):
+    # simulate no "access_token" field
+    monkeypatch.setattr(requests, "post", lambda *a, **k: DummyResponse({"foo":"bar"}))
+    with pytest.raises(RuntimeError):
+        get_bearer_token()
+
+def test_get_headers(monkeypatch):
+    # stub get_bearer_token
+    monkeypatch.setattr(bioopti.media_optimizer, "get_bearer_token", lambda: "abc123")
+    assert get_headers() == {"Authorization":"Bearer abc123"}
+
+def test_search_ids_with_fallback_id_key(monkeypatch, token_resp):
+    # pretend results include dicts with key "id", not "bacdive_id"
+    resp = DummyResponse({"results":[{"id":123}, 456]})
+    monkeypatch.setattr(requests, "get", lambda *a, **k: resp)
+    ids = search_ids("AB 123", headers={})
+    assert ids == [123, 456]
+
+def test_search_ids_http_error(monkeypatch):
+    err = DummyResponse({}, status_code=500)
+    monkeypatch.setattr(requests, "get", lambda *a, **k: err)
+    with pytest.raises(requests.HTTPError):
+        search_ids("Foo bar", headers={})
+
+def test_fetch_strain_list(monkeypatch):
+    data = [{"foo":"bar"}]
+    resp = DummyResponse({"results": data})
+    monkeypatch.setattr(requests, "get", lambda *a, **k: resp)
+    assert fetch_strain(1, {}) == data[0]
+
+def test_fetch_strain_empty(monkeypatch):
+    # no results key or empty
+    resp = DummyResponse({})
+    monkeypatch.setattr(requests, "get", lambda *a, **k: resp)
+    assert fetch_strain(1, {}) == {}
+
+def test_extract_media_multiple_entries():
+    strain = {"Culture and growth conditions":{
+        "culture medium":[{"name":"A"}, {"name":"B"}]
+    }}
+    media = extract_media(strain)
+    assert [m["name"] for m in media] == ["A","B"]
+
+def test_extract_media_missing_key():
+    assert extract_media({}) == []
+    assert extract_media({"Culture and growth conditions":{}}) == []
+
+def test_extract_temperature_growth_field():
+    strain = {"Culture and growth conditions":{
+        "opt_temp":[],"some_temp":[{"test_type":"growth","value": 42}]
+    }}
+    assert extract_temperature(strain) == "42°C"
+
+def test_extract_temperature_numeric_field():
+    strain = {"Culture and growth conditions":{
+        "foo_temp":[{"temperature": 37}]
+    }}
+    assert extract_temperature(strain) == "37°C"
+
+def test_extract_temperature_range_hyphen():
+    strain = {"Culture and growth conditions":{
+        "temp_info":[{"value":"10-20"}]
+    }}
+    # (10+20)/2 = 15
+    assert extract_temperature(strain) == "15°C"
+
+def test_extract_temperature_description():
+    strain = {"Culture and growth conditions":{
+        "weird":[{"description":"thrives at 55 °C in lab"}]
+    }}
+    assert extract_temperature(strain) == "55°C"
+
+def test_run_no_media(monkeypatch, capsys):
+    # search → [1], fetch → no culture medium
+    monkeypatch.setattr(mo, "search_ids", lambda q,h: [1])
+    monkeypatch.setattr(mo, "fetch_strain", lambda i,h: {})
+    # must exit 0 with correct message
+    with pytest.raises(SystemExit) as e:
+        run("foo")
+    out = capsys.readouterr().out
+    assert "No medium info available for 'foo'" in out
     assert e.value.code == 0

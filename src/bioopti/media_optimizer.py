@@ -84,11 +84,22 @@ def fetch_strain(bd_id, headers):
     resp = requests.get(f"{API_BASE_URL}/fetch/{bd_id}", headers=headers)
     resp.raise_for_status()
     raw = resp.json().get("results", {})
+
     if isinstance(raw, dict):
-        return next(iter(raw.values()))
+        try:
+            # grab the first value in the dict
+            return next(iter(raw.values()))
+        except StopIteration:
+            # if the dict was empty, return {} instead of erroring
+            return {}
     elif isinstance(raw, list):
+        # if it's a list, return first element (or {} if the list is empty)
         return raw[0] if raw else {}
-    return {}
+    else:
+        # fallback for any other shape
+        return {}
+
+
 
 
 
@@ -248,3 +259,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# -------------------------------------------------------
+# make 'imizer' point back to this module so tests can monkeypatch it
+import sys
+imizer = sys.modules[__name__]
