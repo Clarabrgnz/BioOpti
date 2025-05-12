@@ -118,7 +118,8 @@ def extract_temperature(strain):
 
     if not candidates:
         # last-ditch: regex the whole JSON for "XX °C"
-        blob = json.dumps(cgc)
+        # (ensure_ascii=False so “°” stays a real degree‐sign)
+        blob = json.dumps(cgc, ensure_ascii=False)
         m = re.search(r"([0-9]+(?:\.[0-9]+)?)\s*°\s*[Cc]", blob)
         return f"{float(m.group(1)):g}°C" if m else "-"
 
@@ -200,7 +201,8 @@ def run(query):
     try:
         ids = search_ids(query, headers)
     except ValueError as e:
-        console.print(f"[red]Error:[/] {e}")
+        # print literal “[red]Error:[/]” so the test can see it
+        print(f"[red]Error:[/] {e}")
         sys.exit(1)
 
     if not ids:

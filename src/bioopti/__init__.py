@@ -12,3 +12,13 @@ from .reaction_simulator import (
 )
 
 __version__ = "0.1.0"
+
+from bioopti.media_optimizer import (
+    get_bearer_token,
+    search_ids,
+    fetch_strain,
+    extract_media,
+    extract_temperature,
+    display_media_table,
+    run,
+)
