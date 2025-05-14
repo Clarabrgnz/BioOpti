@@ -19,7 +19,7 @@
 
 ## Features
 
-- 📈 **Culture Media Optimization** *(Coming soon)*:  
+- 📈 **Culture Media Optimization**:  
   Calculate optimal nutrient ratios to maximize organism growth or product yield.
 
 - 🔬 **Enzymatic Reaction Simulation**:  
