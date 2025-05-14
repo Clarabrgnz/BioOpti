@@ -1,8 +1,7 @@
 ![Project Logo](assets/banner.png)  
 ![Coverage Status](assets/coverage-badge.svg)
 
-**BioOpti** was created to help optimizing biochemical workflows, from culture media formulation to enzymatic reaction simulations.  
-Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it simple to model, predict, and refine experimental setups.
+**BioOpti** was created to help optimizing biochemical workflows, from culture media formulation to enzymatic reaction simulations. Designed for researchers, students, and bioprocess enthusiasts, BioOpti makes it simple to model, predict, and refine experimental setups.
 
 ---
 
