@@ -4,12 +4,6 @@ This folder contains all the **local datasets** used by the BioOpti project.
 
 ---
 
-## 🧪 Medium Optimization Dataset
-
-🔧 **(To be completed)**
-
----
-
 ## 🔬 Enzyme Kinetics Dataset
 
 - **Filename**: `enzyme_data.json`
