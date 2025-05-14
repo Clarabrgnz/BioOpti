@@ -14,7 +14,8 @@ dependencies = [
     "scipy",
     "matplotlib",
     "pandas",
-    "rich"
+    "rich",
+    "ipywidgets"
 ]
 authors = [
     {name = "Clara", email = "clarabergonzi@gmail.com"}
