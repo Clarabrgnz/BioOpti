@@ -24,7 +24,7 @@
 
 - 🔬 **Enzymatic Reaction Simulation**:  
   Predict enzyme-catalyzed reaction rates under varying conditions (substrate concentration, pH, temperature, inhibitors).
-  Easily simulate reactions based on Vmax, Km, inhibition type, and environmental factors.
+  Easily simulate and optimize reactions based on Vmax, Km, inhibition type, and environmental factors.
 
 ---
 
@@ -126,8 +126,9 @@ print(f"Simulated reaction rate: {rate:.2f} µmol/min")
 ## Contributors
 
 - **Clara Bergonzi** — Package Infrastructure, Reaction Simulation Module
-- *(Add your teammates here)*
-
+- **Pietre Bonaldi** —
+- **Marc Tang Vidale** —
+- **William Brian Pellassy** — Reaction Optimization Module, Notebook Development Contribution
 ---
 
 ## License
