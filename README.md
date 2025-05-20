@@ -20,7 +20,8 @@
 ## Features
 
 - 📈 **Culture Media Optimization**:  
-  Calculate optimal nutrient ratios to maximize organism growth or product yield.
+  Query the BACDive database to retrieve documented culture media for a given bacterial strain (by taxon name or culture collection number).
+  Display each medium’s name, composition, reported growth performance, and associated metadata such as optimal temperature.
 
 - 🔬 **Enzymatic Reaction Simulation**:  
   Predict enzyme-catalyzed reaction rates under varying conditions (substrate concentration, pH, temperature, inhibitors).
@@ -95,7 +96,14 @@ tox
 ## Quick Start
 
 ### ➞ Culture Media Optimization
-*(Coming soon! 🚧)*
+This example shows how to query the BACDive database for a known strain, and retrieve the list of documented culture media with associated growth performance.
+
+```python
+from bioopti.media_optimizer import run
+
+# Query BACDive for a bacterial strain
+run("Pseudomonas aeruginosa")
+```
 
 ### ➞ Simulating Enzymatic Reactions
 This example shows how to simulate the rate of an enzyme-catalyzed reaction using known kinetic parameters.
@@ -126,8 +134,8 @@ print(f"Simulated reaction rate: {rate:.2f} µmol/min")
 ## Contributors
 
 - **Clara Bergonzi** — Package Infrastructure, Reaction Simulation Module
-- **Pietre Bonaldi** — Media Optimization Code and test simulation for its optimization.
-- **Marc Tang Vidale** —
+- **Pietre Bonaldi** — Media Optimization Module and test simulation for its optimization.
+- **Marc Tang Vidale** — Media Optimization Module, Notebook Development Contribution
 - **William Brian Pellassy** — Reaction Optimization Module, Notebook Development Contribution
 ---
 
