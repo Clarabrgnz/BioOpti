@@ -136,7 +136,7 @@ print(f"Simulated reaction rate: {rate:.2f} µmol/min")
 - **Clara Bergonzi** — Package Infrastructure, Reaction Simulation Module
 - **Pietre Bonaldi** — Media Optimization Module and test simulation for its optimization.
 - **Marc Tang Vidale** — Media Optimization Module, Notebook Development Contribution
-- **William Brian Pellassy** — Reaction Optimization Module, Notebook Development Contribution
+- **William Brian Pellassy** — Reaction Simulation Module, Notebook Development Contribution
 ---
 
 ## License
