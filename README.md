@@ -20,8 +20,7 @@
 ## Features
 
 - 📈 **Culture Media Optimization**:  
-  Query the BACDive database to retrieve documented culture media for a given bacterial strain (by taxon name or culture collection number).
-  Display each medium’s name, composition, reported growth performance, and associated metadata such as optimal temperature.
+  Query the BACDive database to retrieve documented culture media for a given bacterial strain (by taxon name or culture collection number). Display each medium’s name, composition, reported growth performance, and associated metadata such as optimal temperature.
 
 - 🔬 **Enzymatic Reaction Simulation**:  
   Predict enzyme-catalyzed reaction rates under varying conditions (substrate concentration, pH, temperature, inhibitors).
@@ -31,7 +30,7 @@
 
 ## Installation
 
-### 🔄 Clone the Repository
+- 🔄 **Clone the Repository**
 
 First, choose a location on your computer where you want to store the project. For example, you can use your `Documents` folder.
 Open your terminal and run:
@@ -46,7 +45,7 @@ This will create a folder named `BioOpti` containing all the project files.
 
 ---
 
-### 🐍 Create and Activate a Python Environment
+- 🐍 **Create and Activate a Python Environment**
 
 Then, create a new environment (feel free to use a different environment name if you prefer):
 
@@ -56,7 +55,7 @@ conda activate bioopti
 ```
 ---
 
-### 📥 Install the Package
+- 🧫 **Install the Package**
 
 Make sure you are inside the `BioOpti` folder and run:
 
@@ -65,7 +64,7 @@ pip install .
 ```
 ---
 
-### 📓 Install JupyterLab
+- 📓 **Install JupyterLab**
 
 In order to use the Jupyter Notebook for demos or development:
 
@@ -95,7 +94,7 @@ tox
 
 ## Quick Start
 
-### ➞ Culture Media Optimization
+### Culture Media Optimization 🧫
 This example shows how to query the BACDive database for a known strain, and retrieve the list of documented culture media with associated growth performance.
 
 ```python
@@ -105,7 +104,7 @@ from bioopti.media_optimizer import run
 run("Pseudomonas aeruginosa")
 ```
 
-### ➞ Simulating Enzymatic Reactions
+### Simulating Enzymatic Reactions 🔬
 This example shows how to simulate the rate of an enzyme-catalyzed reaction using known kinetic parameters.
 Provide experimental conditions such as substrate concentration, Vmax, Km, pH, temperature, and optional inhibitor information, and the function simulate_reaction_rate will calculate the expected reaction rate (µmol/min) under these specific conditions.
 
@@ -134,7 +133,7 @@ print(f"Simulated reaction rate: {rate:.2f} µmol/min")
 ## Contributors
 
 - **Clara Bergonzi** — Package Infrastructure, Reaction Simulation Module
-- **Pietre Bonaldi** — Media Optimization Module and test simulation for its optimization.
+- **Pietre Bonaldi** — Media Optimization Module, Tests and Coverage 
 - **Marc Tang Vidale** — Media Optimization Module, Notebook Development Contribution
 - **William Brian Pellassy** — Reaction Simulation Module, Notebook Development Contribution
 ---
